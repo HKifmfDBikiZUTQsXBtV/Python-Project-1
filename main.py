@@ -5,7 +5,6 @@ from bank_operator.bank_operator import *
 
 console = Console()
 
-
 def menu():
     while True:
         table = Table(title="🏦 Bank System Menu", title_style="bold magenta")
