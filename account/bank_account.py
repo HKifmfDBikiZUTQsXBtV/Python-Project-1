@@ -41,8 +41,8 @@ class SavingsAccount(BankAccount):
     MIN_BALANCE = 100
 
     def withdraw(self, amount):
-        if self.balance - amount < self.MIN_BALANCE:
-            print("")
+        if (self.balance - amount) < self.MIN_BALANCE:
+            print("Insufficient balance!")
             return 
         super().withdraw(amount)
 

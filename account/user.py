@@ -1,3 +1,5 @@
+import re
+
 class User:
     def __init__(self, name, email):
         self.name = name
@@ -14,13 +16,23 @@ class User:
         account_count = len(self.accounts) +1
         return account_count
 
-
     def remove_account(self, account):
         return "Account"
 
     def is_valid_email(self,email):
-        return None
+        while True:
+            match_email = re.match('[a-zA-Z]{2,}$/', email)
+            if not match_email:
+                print('Invalid email address!')
+            else:
+                break
 
+        return True
 
     def __str__(self):
-        return f"{self.name} ({self.email}) - {self.get_account_count()} account(s), Total Balance: ${self.get_total_balance()}"
+        return f"""
+Name: {self.name} 
+Email: {self.email} 
+Number of Accounts: {self.get_account_count()} account(s)
+Total Balance: ${self.get_total_balance()}
+"""
