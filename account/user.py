@@ -14,13 +14,19 @@ class User:
         account_count = len(self.accounts) +1
         return account_count
 
-
     def remove_account(self, account):
         return "Account"
 
     def is_valid_email(self,email):
-        return None
-
+        if '@gmail.com' in email:
+            return True
+        else:
+            return False
 
     def __str__(self):
-        return f"{self.name} ({self.email}) - {self.get_account_count()} account(s), Total Balance: ${self.get_total_balance()}"
+        return f"""
+Name: {self.name} 
+Email: {self.email} 
+Number of Accounts: {self.get_account_count()} account(s)
+Total Balance: ${self.get_total_balance()}
+"""

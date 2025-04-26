@@ -4,17 +4,18 @@ from account.bank_account import BankAccount, SavingsAccount, CurrentAccount, St
 users = []
 
 def create_user():
-    name = input("Enter name: ")
-    email = input("Enter email: ")
+    (name, email) = (input("Enter name: "), input("Enter email: "))
     user = User(name, email)
     if not user.is_valid_email(email):
         print("Email is invalid!")
+    else:
+        print('Email is valid')
     users.append(user)
     print(f"User {name} created.\n")
 
-def list_users():
-    for i, user in enumerate(users):
-        print(f"{i+1}. {user}")
+def users_list():
+    for i in range(len(users)):
+        print(f"{i+1}. {users[i]}")
 
 def create_account():
     list_users()
