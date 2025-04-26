@@ -23,26 +23,29 @@ def list_users():
 
 def create_account():
     list_users()
-    idx = int(input("Select user number: ")) - 1
-    print("Account Type:")
-    print("1. Savings Account")
-    print("2. Students Account")
-    print("3. Current Account")
-    account_choice = int(input("Enter your choice (1, 2, 3): "))
-    amount = float(input("Enter initial deposit: "))
+    if len(users) != 0:
+        idx = int(input("Select user number: ")) - 1
+        print("Account Type:")
+        print("1. Savings Account")
+        print("2. Students Account")
+        print("3. Current Account")
+        account_choice = int(input("Enter your choice (1, 2, 3): "))
+        amount = float(input("Enter initial deposit: "))
 
-    if account_choice == 1:
-        account = SavingsAccount(amount)
-    elif account_choice == 2:
-        account = StudentAccount(amount)
-    elif account_choice == 3:
-        account = CurrentAccount(amount)
+        if account_choice == 1:
+            account = SavingsAccount(amount)
+        elif account_choice == 2:
+            account = StudentAccount(amount)
+        elif account_choice == 3:
+            account = CurrentAccount(amount)
+        else:
+            print("Invalid choice!")
+            account = BankAccount(amount)
+
+        users[idx].add_account(account)
+        print(f"{account.get_account_type()} added!\n")
     else:
-        print("Invalid choice!")
-        account = BankAccount(amount)
-
-    users[idx].add_account(account)
-    print(f"{account.get_account_type()} added!\n")
+        print('No users currently available, so creating an account is not possible.')
 
 def deposit_money():
     list_users()
