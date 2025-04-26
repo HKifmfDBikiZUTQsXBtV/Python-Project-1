@@ -29,7 +29,10 @@ def menu():
         if choice == '2':
             list_users()
         elif choice == '3':
-            create_account()
+            if users != []:
+                create_account()
+            else:
+                print('No users registered, so accounts cannot be created')
         elif choice == '4':
             deposit_money()
         elif choice == '5':

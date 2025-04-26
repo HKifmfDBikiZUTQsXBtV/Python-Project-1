@@ -23,7 +23,7 @@ def list_users():
 
 def create_account():
     list_users()
-    if len(users) != 0:
+    if users == []:
         idx = int(input("Select user number: ")) - 1
         print("Account Type:")
         print("1. Savings Account")
