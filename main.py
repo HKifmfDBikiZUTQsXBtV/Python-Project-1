@@ -32,7 +32,7 @@ def menu():
             if users != []:
                 create_account()
             else:
-                print('No users registered, so accounts cannot be created')
+                print("No users available. Please create a user first.")
         elif choice == '4':
             deposit_money()
         elif choice == '5':
