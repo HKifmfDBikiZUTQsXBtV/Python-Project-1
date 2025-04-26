@@ -6,46 +6,55 @@ users = []
 def create_user():
     (name, email) = (input("Enter name: "), input("Enter email: "))
     user = User(name, email)
-    if not user.is_valid_email(email):
+    while not user.is_valid_email(email):
         print("Email is invalid!")
+        email = input('Enter email: ')
     else:
         print('Email is valid')
     users.append(user)
     print(f"User {name} created.\n")
 
 def list_users():
-    print('list_users() works')
-    if not len(users) == 0:
-        for i in range(len(users)):
-            print(f"{i+1}. {users[i]}")
-    else:
-        print('No users found')
+    for i in range(len(users)):
+        print(f"{i+1}. {users[i]}")
+    return True
 
 def create_account():
     list_users()
     if len(users) != 0:
-        idx = int(input("Select user number: ")) - 1
+        idx = 0
+        while True:
+            try:
+                idx = int(input("Select user number: ")) - 1
+            except IndexError:
+                print("Invalid user selection.\n")
+            
         print("Account Type:")
         print("1. Savings Account")
         print("2. Students Account")
         print("3. Current Account")
-        account_choice = int(input("Enter your choice (1, 2, 3): "))
+        while True:
+            account_choice = int(input("Enter your choice (1, 2, 3): "))
+            if account_choice not in [1, 2, 3]:
+                print("Invalid account type!")
+            else:
+                break
         amount = float(input("Enter initial deposit: "))
-
+        user = users[idx]
         if account_choice == 1:
-            account = SavingsAccount(amount)
+            account = SavingsAccount(user.name, user.email, amount)
         elif account_choice == 2:
-            account = StudentAccount(amount)
+            account = StudentAccount(user.name, user.email, amount)
         elif account_choice == 3:
-            account = CurrentAccount(amount)
+            account = CurrentAccount(user.name, user.email, amount)
         else:
             print("Invalid choice!")
-            account = BankAccount(amount)
+            account = BankAccount(user.name, user.email, amount)
 
         users[idx].add_account(account)
         print(f"{account.get_account_type()} added!\n")
     else:
-        print('No users currently available, so creating an account is not possible.')
+        print("No users available. Please create a user first.")
 
 def deposit_money():
     list_users()
@@ -54,7 +63,8 @@ def deposit_money():
     for i, acc in enumerate(user.accounts):
         print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
     acc_idx = int(input("Select account: ")) - 1
-    amount = float(input("Enter amount to deposit: "))  # Fixed bug
+    amount = float(input("Enter amount to deposit: "))
+    print(acc_idx)
     user.accounts[acc_idx].deposit(amount)
 
 def withdraw_money():

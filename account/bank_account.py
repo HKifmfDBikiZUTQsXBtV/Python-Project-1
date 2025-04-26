@@ -21,7 +21,7 @@ class BankAccount:
             print("Withdrawal amount is invalid!")
         if self.balance < amount-100:
             print("Insufficient Balance!")
-        self.balance += amount
+        self.balance -= amount
         self.transactions_history.append(Transaction(amount, "withdraw"))
 
     def get_balance(self):
