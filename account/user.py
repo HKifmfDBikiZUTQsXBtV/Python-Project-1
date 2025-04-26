@@ -1,3 +1,5 @@
+import re
+
 class User:
     def __init__(self, name, email):
         self.name = name
@@ -22,6 +24,9 @@ class User:
             return True
         else:
             return False
+        match_email = re.match('[a-zA-Z]{2,}$/', email)
+        if not match_email:
+            print('Invalid email address!')
 
     def __str__(self):
         return f"""

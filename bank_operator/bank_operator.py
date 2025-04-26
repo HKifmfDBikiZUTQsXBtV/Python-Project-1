@@ -23,8 +23,17 @@ def list_users():
 
 def create_account():
     list_users()
-    if users == []:
-        idx = int(input("Select user number: ")) - 1
+    if len(users) != 0:
+        idx = 0
+        while True:
+            try:
+                idx = int(input("Select user number: ")) - 1
+                user = users[idx]
+                break
+            except IndexError:
+                print("Invalid user selection.\n")
+                continue
+            
         print("Account Type:")
         print("1. Savings Account")
         print("2. Students Account")
@@ -49,34 +58,79 @@ def create_account():
 
 def deposit_money():
     list_users()
-    idx = int(input("Select user: ")) - 1
-    user = users[idx]
-    for i, acc in enumerate(user.accounts):
-        print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
-    acc_idx = int(input("Select account: ")) - 1
-    amount = float(input("Enter amount to deposit: "))  # Fixed bug
-    user.accounts[acc_idx].deposit(amount)
+    if len(users) != 0:
+        while True:
+            try:
+                idx = int(input("Select user number: ")) - 1
+                user = users[idx]
+                break
+            except IndexError:
+                print("Invalid user selection.\n")
+                continue
+        
+        for i, acc in enumerate(user.accounts):
+            print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
+        while True:
+            try:
+                acc_idx = int(input("Select account: ")) - 1
+                
+                account = user.accounts[acc_idx]
+                break
+            except IndexError:
+                print('Invalid account selection.\n')
+                continue
+
+        amount = float(input("Enter amount to deposit: "))
+        account.deposit(amount)
+
+    else:
+        print('This operation cannot be processed, as the number of users are 0')
 
 def withdraw_money():
     list_users()
-    idx = int(input("Select user: ")) - 1
-    user = users[idx]
-    for i, acc in enumerate(user.accounts):
-        print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
-    acc_idx = int(input("Select account: ")) - 1
-    amount = float(input("Enter amount to withdraw: "))
-    try:
-        user.accounts[acc_idx].withdraw(amount)
-        print("Withdrawal successful.\n")
-    except ValueError as e:
-        print(f"Error: {e}\n")
+    if len(users) != 0:
+        while True:
+            try:
+                idx = int(input("Select user number: ")) - 1
+                user = users[idx]
+                break
+            except IndexError:
+                print("Invalid user selection.\n")
+                continue
+        for i, acc in enumerate(user.accounts):
+            print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
+        while True:
+            try:
+                acc_idx = int(input("Select account: ")) - 1
+                
+                account = user.accounts[acc_idx]
+                break
+            except IndexError:
+                print('Invalid account selection.\n')
+                continue
+        amount = float(input("Enter amount to withdraw: "))
+        try:
+            account.withdraw(amount)
+            print("Withdrawal successful.\n")
+        except ValueError as e:
+            print(f"Error: {e}\n")
+    else:
+        print('This operation cannot be processed, as the number of users are 0')
 
 def view_transactions():
     list_users()
-    idx = int(input("Select user: ")) - 1
-    user = users[idx]
-    for i, acc in enumerate(user.accounts):
-        print(f"\n{acc.get_account_type()} {i+1} - Balance: Rs. {acc.get_balance()}")
-        for tx in acc.get_transaction_history():
-            print(tx)
-
+    if len(users) != 0:
+        while True:
+            try:
+                idx = int(input("Select user number: ")) - 1
+                user = users[idx]
+                break
+            except IndexError:
+                print("Invalid user selection.\n")
+                continue
+        for i, acc in enumerate(user.accounts):
+            print(f"\n{acc.get_account_type()} {i+1} - Balance: Rs. {acc.get_balance()}")
+            for tx in acc.get_transaction_history():
+                print(tx)
+    else:
+        print('This operation cannot be processed, as the number of users are 0')
