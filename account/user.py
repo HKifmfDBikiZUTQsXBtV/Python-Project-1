@@ -20,13 +20,14 @@ class User:
         return "Account"
 
     def is_valid_email(self,email):
-        if '@gmail.com' in email:
-            return True
-        else:
-            return False
-        match_email = re.match('[a-zA-Z]{2,}$/', email)
-        if not match_email:
-            print('Invalid email address!')
+        while True:
+            match_email = re.match('[a-zA-Z]{2,}$/', email)
+            if not match_email:
+                print('Invalid email address!')
+            else:
+                break
+
+        return True
 
     def __str__(self):
         return f"""
