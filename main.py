@@ -8,7 +8,6 @@ console = Console()
 
 def menu():
     while True:
-
         table = Table(title="🏦 Bank System Menu", title_style="bold magenta")
 
         table.add_column("Option", style="cyan", justify="center")
@@ -28,7 +27,7 @@ def menu():
         if choice == '1':
             create_user()
         if choice == '2':
-            users_list()
+            list_users()
         elif choice == '3':
             create_account()
         elif choice == '4':

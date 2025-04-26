@@ -13,9 +13,13 @@ def create_user():
     users.append(user)
     print(f"User {name} created.\n")
 
-def users_list():
-    for i in range(len(users)):
-        print(f"{i+1}. {users[i]}")
+def list_users():
+    print('list_users() works')
+    if not len(users) == 0:
+        for i in range(len(users)):
+            print(f"{i+1}. {users[i]}")
+    else:
+        print('No users found')
 
 def create_account():
     list_users()
